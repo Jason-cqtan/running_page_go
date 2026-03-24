@@ -1,0 +1,31 @@
+name: Sync Garmin Data
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.22'
+          cache: true
+
+      - name: Sync Garmin Data
+        run: |
+          go run ./cmd/garmin_sync \
+            --secret "${{ secrets.GARMIN_SECRET_STRING }}" \
+            --cn=${{ secrets.GARMIN_IS_CN }} \
+            --type=gpx
+
+      - name: Commit and Push updated data
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: sync garmin data [skip ci]"
+          file_pattern: "src/static/activities.json GPX_OUT/*.gpx"
