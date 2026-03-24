@@ -1,0 +1,27 @@
+# 二进制文件
+bin/
+
+# 数据库文件
+*.db
+
+# 活动数据
+activities/activities.json
+
+# 活动文件
+GPX_OUT/*.gpx
+TCX_OUT/*.tcx
+FIT_OUT/*.fit
+
+# 环境配置
+.env
+config.yaml
+secret_string.json
+
+# 操作系统
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
