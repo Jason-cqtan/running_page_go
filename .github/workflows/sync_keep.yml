@@ -1,0 +1,31 @@
+name: Sync Keep Data
+
+on:
+  schedule:
+    - cron: '0 1 * * *'
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.22'
+          cache: true
+
+      - name: Sync Keep Data
+        run: |
+          go run ./cmd/keep_sync \
+            --phone="${{ secrets.KEEP_PHONE }}" \
+            --password="${{ secrets.KEEP_PASSWORD }}" \
+            --sync-types="running"
+
+      - name: Commit and Push updated data
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: sync keep data [skip ci]"
+          file_pattern: "src/static/activities.json GPX_OUT/*.gpx"

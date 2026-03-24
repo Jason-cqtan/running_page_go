@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    /* Visit https://aka.ms/tsconfig.json to read more about this file */
+
+    /* Language and Environment */
+    "types": ["vite/client", "vite-plugin-svgr/client"],
+    "target": "esnext",
+    "lib": ["dom", "esnext"],
+    "jsx": "react-jsx",
+
+    /* Modules */
+    "module": "esnext",
+    "moduleResolution": "node",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@assets/*": ["./assets/*"]
+    },
+    "resolveJsonModule": true,
+
+    /* Interop Constraints */
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+
+    /* Type Checking */
+    "strict": true,
+
+    /* Completeness */
+    "skipLibCheck": true
+  },
+  "include": ["./src/**/*", "./plugins/**/*", "vite-env.d.ts"]
+}

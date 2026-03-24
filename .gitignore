@@ -6,6 +6,7 @@ bin/
 
 # 活动数据
 activities/activities.json
+# 注意: src/static/activities.json 不忽略（由 Go 同步脚本生成后提交）
 
 # 活动文件
 GPX_OUT/*.gpx
@@ -25,3 +26,7 @@ Thumbs.db
 .idea/
 .vscode/
 *.swp
+
+# 前端构建产物
+dist/
+node_modules/
